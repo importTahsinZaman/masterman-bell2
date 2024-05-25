@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { setAuth } from "./actions";
+import { setAuth } from "../app/actions";
 
 export default function Home() {
   const router = useRouter();
