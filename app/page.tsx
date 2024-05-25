@@ -7,7 +7,7 @@ export default function Home() {
   const router = useRouter();
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     // Handle form submission
     if (password == process.env.NEXT_PUBLIC_SITE_PASSWORD) {
