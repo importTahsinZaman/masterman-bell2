@@ -64,9 +64,13 @@ export default function manage_schedules() {
   };
 
   const deleteSchedule = async (id) => {
-    setSchedules(schedules.filter((schedule) => schedule.id !== id));
+    if (id == currentScheduleId) {
+      alert("CANNOT DELETE CURRENT SCHEDULE");
+    } else {
+      const { error } = await supabase.from("Schedules").delete().eq("id", id);
 
-    const { error } = await supabase.from("Schedules").delete().eq("id", id);
+      setSchedules(schedules.filter((schedule) => schedule.id !== id));
+    }
   };
 
   const selectScheduleToEdit = (id) => {
