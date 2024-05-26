@@ -30,7 +30,12 @@ export default function manage_schedules() {
     });
     const getSchedules = async () => {
       const { data } = await supabase.from("Schedules").select();
+      data.sort((a, b) => a.id - b.id);
       setSchedules(data);
+
+      data.map(
+        (schedule) => schedule.selected && setCurrentScheduleId(schedule.id)
+      );
     };
     getSchedules();
   }, []);
@@ -68,8 +73,21 @@ export default function manage_schedules() {
     setCurrentScheduleToEditId(id);
   };
 
-  const selectSchedule = (id) => {
+  const selectSchedule = async (id) => {
     setCurrentScheduleId(id);
+    const { error } = await supabase
+      .from("Schedules")
+      .update({
+        selected: false,
+      })
+      .neq("id", id);
+
+    const { error2 } = await supabase
+      .from("Schedules")
+      .update({
+        selected: true,
+      })
+      .eq("id", id);
   };
 
   if (!authorized) {
