@@ -8,7 +8,6 @@ import ScheduleForm from "../../components/ScheduleForm";
 import TimeSlotList from "../../components/TimeSlotList";
 
 import { createClient } from "@/utils/supabase/client";
-import { create } from "domain";
 
 export default function manage_schedules() {
   const supabase = createClient();
@@ -29,11 +28,11 @@ export default function manage_schedules() {
         router.push("/");
       }
     });
-    const getData = async () => {
+    const getSchedules = async () => {
       const { data } = await supabase.from("Schedules").select();
       setSchedules(data);
     };
-    getData();
+    getSchedules();
   }, []);
 
   const addSchedule = async (schedule) => {
@@ -42,20 +41,27 @@ export default function manage_schedules() {
     const { error } = await supabase
       .from("Schedules")
       .insert({ ...schedule, id: Date.now() });
-    console.log("schedules: ", schedules);
-    console.log("error: ", error);
   };
 
-  const updateSchedule = (id, updatedSchedule) => {
+  const updateSchedule = async (id, updatedSchedule) => {
     setSchedules(
       schedules.map((schedule) =>
         schedule.id === id ? updatedSchedule : schedule
       )
     );
+
+    const { error } = await supabase
+      .from("Schedules")
+      .update({
+        timeslots: updatedSchedule.timeslots,
+      })
+      .eq("id", id);
   };
 
-  const deleteSchedule = (id) => {
+  const deleteSchedule = async (id) => {
     setSchedules(schedules.filter((schedule) => schedule.id !== id));
+
+    const { error } = await supabase.from("Schedules").delete().eq("id", id);
   };
 
   const selectScheduleToEdit = (id) => {
