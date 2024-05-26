@@ -1,14 +1,19 @@
 "use client";
 import { useState, useEffect } from "react";
-import { getAuthorized, deleteCookie } from "../actions";
+import { getAuthorized, getSchedules } from "../actions";
 import { useRouter } from "next/navigation";
 
 import ScheduleList from "../../components/ScheduleList";
 import ScheduleForm from "../../components/ScheduleForm";
 import TimeSlotList from "../../components/TimeSlotList";
 
+import { createClient } from "@/utils/supabase/client";
+import { create } from "domain";
+
 export default function manage_schedules() {
+  const supabase = createClient();
   const router = useRouter();
+
   const [authorized, setAuthorized] = useState(false);
 
   const [schedules, setSchedules] = useState([]);
@@ -24,12 +29,21 @@ export default function manage_schedules() {
         router.push("/");
       }
     });
+    const getData = async () => {
+      const { data } = await supabase.from("Schedules").select();
+      setSchedules(data);
+    };
+    getData();
   }, []);
 
-  const addSchedule = (schedule) => {
+  const addSchedule = async (schedule) => {
     setSchedules([...schedules, { ...schedule, id: Date.now() }]);
     setCurrentScheduleToEditId(Date.now());
+    const { error } = await supabase
+      .from("Schedules")
+      .insert({ ...schedule, id: Date.now() });
     console.log("schedules: ", schedules);
+    console.log("error: ", error);
   };
 
   const updateSchedule = (id, updatedSchedule) => {
