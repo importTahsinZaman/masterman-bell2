@@ -28,22 +28,23 @@ export default function manage_schedules() {
         router.push("/");
       }
     });
-    const getSchedules = async () => {
-      const { data } = await supabase.from("Schedules").select();
-      data.sort((a, b) => a.id - b.id);
-      setSchedules(data);
 
-      data.map(
-        (schedule) =>
-          schedule.selected && setCurrentScheduleToEditId(schedule.id)
-      );
-
-      data.map(
-        (schedule) => schedule.selected && setCurrentScheduleId(schedule.id)
-      );
-    };
     getSchedules();
   }, []);
+
+  const getSchedules = async () => {
+    const { data } = await supabase.from("Schedules").select();
+    data.sort((a, b) => a.id - b.id);
+    setSchedules(data);
+
+    data.map(
+      (schedule) => schedule.selected && setCurrentScheduleToEditId(schedule.id)
+    );
+
+    data.map(
+      (schedule) => schedule.selected && setCurrentScheduleId(schedule.id)
+    );
+  };
 
   const addSchedule = async (schedule) => {
     setSchedules([...schedules, { ...schedule, id: Date.now() }]);
