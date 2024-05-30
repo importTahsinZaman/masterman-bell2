@@ -25,6 +25,7 @@ export default function ScheduleForm({ addSchedule }) {
           onChange={(e) => setName(e.target.value)}
           placeholder="Schedule Name"
           className="border p-2 rounded-lg flex-1"
+          maxLength={25}
         />
         <button
           type="submit"
