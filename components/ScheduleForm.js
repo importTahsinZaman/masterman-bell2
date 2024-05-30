@@ -7,24 +7,29 @@ export default function ScheduleForm({ addSchedule }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (name != "") {
+    if (name !== "") {
       addSchedule({ name, timeslots: [] });
       setName("");
     }
   };
 
   return (
-    <div>
-      <h2 className="text-xl font-bold mb-2">Add Schedule</h2>
-      <form onSubmit={handleSubmit} className="mb-4 text-black">
+    <div className="p-4 bg-white shadow rounded-lg my-4">
+      <h2 className="text-2xl font-semibold mb-4 text-gray-800">
+        Add Schedule
+      </h2>
+      <form onSubmit={handleSubmit} className="flex items-center space-x-2">
         <input
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Schedule Name"
-          className="border p-2 mr-2"
+          className="border p-2 rounded-lg flex-1"
         />
-        <button type="submit" className="bg-blue-500 text-white p-2">
+        <button
+          type="submit"
+          className="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition-colors duration-200"
+        >
           Add
         </button>
       </form>

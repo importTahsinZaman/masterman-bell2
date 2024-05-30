@@ -11,51 +11,51 @@ export default function ScheduleList({
   selectScheduleToEdit,
 }) {
   return (
-    <div>
-      <h2 className="text-xl font-bold mb-2">Schedules</h2>
-      <ul className="list-disc pl-5">
+    <div className="p-4 bg-white shadow rounded-lg">
+      <h2 className="text-2xl font-semibold mb-4 text-gray-800">Schedules</h2>
+      <ul className="space-y-3">
         {schedules.map((schedule) => (
           <li
             key={schedule.id}
-            className={`mb-2 ${
-              currentScheduleToEditId === schedule.id ? "font-bold" : ""
-            }`}
+            className={`cursor-pointer p-3 rounded-lg border ${
+              currentScheduleToEditId === schedule.id
+                ? "border-blue-500"
+                : "border-gray-200"
+            } flex items-center justify-between`}
+            onClick={() => selectScheduleToEdit(schedule.id)}
           >
-            <span
-              onClick={() => selectScheduleToEdit(schedule.id)}
-              className="cursor-pointer"
-            >
+            <span className="text-lg font-medium text-gray-700 hover:text-gray-900 flex-1">
               {schedule.name}
             </span>
-            <button
-              onClick={() => deleteSchedule(schedule.id)}
-              className="ml-4 text-red-500"
-            >
-              Delete
-            </button>
-            {currentScheduleId === schedule.id ? (
-              <button disabled className="ml-4 text-green-100">
-                Current
-              </button>
-            ) : (
+            <div className="flex items-center space-x-4">
               <button
-                onClick={() => {
-                  if (
-                    confirm(
-                      "Are you sure you want to set the Masterman bell schedule to " +
-                        schedule.name +
-                        "?"
-                    )
-                  ) {
-                    selectSchedule(schedule.id);
-                    selectScheduleToEdit(schedule.id);
-                  }
-                }}
-                className="ml-4 text-green-500"
+                onClick={() => deleteSchedule(schedule.id)}
+                className="text-red-500 hover:text-red-700 transition-colors duration-200 ml-4"
               >
-                Select
+                Delete
               </button>
-            )}
+              {currentScheduleId === schedule.id ? (
+                <button disabled className="text-green-500 cursor-not-allowed">
+                  Current
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    if (
+                      confirm(
+                        `Are you sure you want to set the Masterman bell schedule to ${schedule.name}?`
+                      )
+                    ) {
+                      selectSchedule(schedule.id);
+                      selectScheduleToEdit(schedule.id);
+                    }
+                  }}
+                  className="text-blue-500 hover:text-blue-700 transition-colors duration-200"
+                >
+                  Select
+                </button>
+              )}
+            </div>
           </li>
         ))}
       </ul>

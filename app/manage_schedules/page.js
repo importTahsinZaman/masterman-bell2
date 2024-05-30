@@ -34,6 +34,11 @@ export default function manage_schedules() {
       setSchedules(data);
 
       data.map(
+        (schedule) =>
+          schedule.selected && setCurrentScheduleToEditId(schedule.id)
+      );
+
+      data.map(
         (schedule) => schedule.selected && setCurrentScheduleId(schedule.id)
       );
     };
@@ -99,10 +104,9 @@ export default function manage_schedules() {
   }
 
   return (
-    <div className="container mx-auto p-4 ">
-      <h1 className="text-2xl font-bold mb-4">Schedule Manager</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
+    <div className="w-screen h-screen">
+      <div className="flex justify-center p-10">
+        <div className="flex-col px-40">
           <ScheduleList
             schedules={schedules}
             deleteSchedule={deleteSchedule}
@@ -113,7 +117,7 @@ export default function manage_schedules() {
           />
           <ScheduleForm addSchedule={addSchedule} />
         </div>
-        <div>
+        <div className="px-40">
           {currentScheduleToEditId && (
             <TimeSlotList
               schedule={schedules.find(
