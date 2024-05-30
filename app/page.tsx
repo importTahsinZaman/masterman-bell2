@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { setAuth } from "../app/actions";
+import Image from "next/image";
 
 export default function Home() {
   const router = useRouter();
@@ -18,11 +19,20 @@ export default function Home() {
       console.log("damn");
     }
   };
+
+  const openUserManual = () => {};
   return (
-    <main className="flex min-h-screen flex-col items-center p-24 justify-center">
+    <main className="flex min-h-screen flex-col items-center p-24 justify-center overflow-hidden">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-sm">
-        <h2 className="text-2xl font-bold mb-6 text-center text-black">
-          Masterman Bell Login
+        <Image
+          src="https://www.mastermanhsa.org/uploads/1/4/3/6/143625689/editor/seal.png?1674618634"
+          alt="mastermanLogo"
+          width={300}
+          height={300}
+          quality={100}
+        ></Image>
+        <h2 className="text-2xl font-bold mb-6 text-center text-black my-4">
+          Masterman Bell
         </h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-6">
@@ -41,16 +51,27 @@ export default function Home() {
               required
             />
           </div>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-center">
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-20 rounded focus:outline-none focus:shadow-outline"
             >
               Login
             </button>
           </div>
         </form>
+        <div className="flex items-center justify-center my-4">
+          <button
+            onClick={() => openUserManual()}
+            className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-14 rounded focus:outline-none focus:shadow-outline"
+          >
+            User Manual
+          </button>
+        </div>
       </div>
+      <h1 className="text-gray-400 text-xs">
+        Created by Tahsin Zaman & Aryan Patel - Class of 2024
+      </h1>
     </main>
   );
 }
