@@ -61,12 +61,15 @@ export default function Home() {
           </div>
         </form>
         <div className="flex items-center justify-center my-4">
-          <button
-            onClick={() => openUserManual()}
+          <a
+            target="_blank"
+            href={
+              "https://docs.google.com/document/d/160SsAJFMDLfQlfl4TCYLV9jvVF5COU3laGlrG-KO3JY/edit"
+            }
             className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-14 rounded focus:outline-none focus:shadow-outline"
           >
             User Manual
-          </button>
+          </a>
         </div>
       </div>
       <h1 className="text-gray-400 text-xs">
