@@ -6,10 +6,31 @@ export default function TimeSlotList({ schedule, updateSchedule }) {
 
   const addTimeSlot = () => {
     if (timeSlot !== "") {
+      function sortMilitaryTimes(times) {
+        // Define a comparator function to convert time strings to comparable values
+        function timeToMinutes(time) {
+          const [hours, minutes] = time.split(":").map(Number);
+          return hours * 60 + minutes;
+        }
+
+        // Sort the times using the comparator function
+        times.sort((a, b) => timeToMinutes(a) - timeToMinutes(b));
+
+        return times;
+      }
+
+      const sortedTimeSlots = sortMilitaryTimes([
+        ...schedule.timeslots,
+        timeSlot,
+      ]);
+
+      const finalTimeSlots = [...new Set(sortedTimeSlots)];
+
       const updatedSchedule = {
         ...schedule,
-        timeslots: [...schedule.timeslots, timeSlot],
+        timeslots: finalTimeSlots,
       };
+
       updateSchedule(schedule.id, updatedSchedule);
       setTimeSlot("");
     }
@@ -24,7 +45,7 @@ export default function TimeSlotList({ schedule, updateSchedule }) {
   };
 
   return (
-    <div className="p-4 bg-white shadow rounded-lg">
+    <div className="p-5 bg-white shadow rounded-lg">
       <h2 className="text-2xl font-semibold mb-4 text-gray-800">
         Timeslots for {schedule.name}
       </h2>
@@ -56,7 +77,7 @@ export default function TimeSlotList({ schedule, updateSchedule }) {
         />
         <button
           onClick={addTimeSlot}
-          className="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition-colors duration-200"
+          className="bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200 py-2 px-4"
         >
           Add
         </button>

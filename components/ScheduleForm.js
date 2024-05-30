@@ -14,7 +14,7 @@ export default function ScheduleForm({ addSchedule }) {
   };
 
   return (
-    <div className="p-4 bg-white shadow rounded-lg my-4">
+    <div className="p-5 bg-white shadow rounded-lg my-4">
       <h2 className="text-2xl font-semibold mb-4 text-gray-800">
         Add Schedule
       </h2>
@@ -28,7 +28,7 @@ export default function ScheduleForm({ addSchedule }) {
         />
         <button
           type="submit"
-          className="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition-colors duration-200"
+          className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors duration-200"
         >
           Add
         </button>

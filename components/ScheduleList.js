@@ -11,7 +11,7 @@ export default function ScheduleList({
   selectScheduleToEdit,
 }) {
   return (
-    <div className="p-4 bg-white shadow rounded-lg">
+    <div className="p-5 bg-white shadow rounded-lg">
       <h2 className="text-2xl font-semibold mb-4 text-gray-800">Schedules</h2>
       <ul className="space-y-3">
         {schedules.map((schedule) => (
