@@ -7,7 +7,7 @@ Although the bells themselves work just fine, the actual method in which they mu
 
 As only one person in the district knows how to program the bells, the school is often left either manually operating the bells, or turning them off altogether when something malfunctions or when an abnormal schedule day such as a weather delay day occurs.
 
-I wired the system, consisting of a Raspberry Pi (mini computer), Arduino (microprocessor), and relay, directly to the switch for the bells. This allows for consistent electronic triggering of the bell system.
+I wired the system, consisting of a Raspberry Pi, Arduino, and relay, directly to the switch for the bells. This allows for consistent electronic triggering of the bell system.
 
 The Raspberry Pi reads the database via api and decides whether or not it is time to ring the bell. 
 
