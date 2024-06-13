@@ -19,7 +19,7 @@ If it is time to ring the bell, the Raspberry Pi tells the Arduino to trigger th
 
 With a password, Masterman administration can log in to the website and create, edit, and select schedules.
 
-<img width="1440" alt="Screenshot 2024-05-30 at 2 06 41 PM" src="https://github.com/importTahsinZaman/masterman-bell2/assets/86907892/e27b9f32-d19d-45f1-ace6-7a1c550c1d8e">
+<img width="1440" alt="Screenshot 2024-06-13 at 2 41 28 PM" src="https://github.com/importTahsinZaman/masterman-bell2/assets/86907892/b34430c2-264a-43d2-8974-f2b553200324">
 
 The website is built with NextJs with Supabase for the database.
 
